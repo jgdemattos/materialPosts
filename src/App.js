@@ -1,13 +1,32 @@
-import React, { Component } from "react";
-
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { handleInitialData } from "./actions/shared";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Root from "./views/Root";
 class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData());
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">Learn React</header>
-      </div>
+      <Router>
+        <Fragment>
+          {this.props.loading === true ? null : (
+            <div>
+              <Route path="/" exact component={Root} />
+            </div>
+          )}
+        </Fragment>
+      </Router>
     );
   }
 }
 
-export default App;
+function mapStateToProps({ authedUser }) {
+  return {
+    loading: authedUser === null
+  };
+}
+
+export default connect(mapStateToProps)(App);
