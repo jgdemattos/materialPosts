@@ -1,26 +1,19 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import CategoriesList from "../components/CategoriesList";
+import Grid from "@material-ui/core/Grid";
 
 class Root extends Component {
   render() {
-    const { categories } = this.props;
-    console.log(categories);
     return (
-      <div className="Root">
-        <ul>
-          {categories.map(category => (
-            <li key={category.name}>{category.name}</li>
-          ))}
-        </ul>
+      <div className="root">
+        <Grid container justify={"center"} spacing={0}>
+          <Grid container spacing={0} direction={"row"} justify={"center"}>
+            <CategoriesList />
+          </Grid>
+        </Grid>
       </div>
     );
   }
 }
 
-function mapStateToProps({ categories }) {
-  return {
-    categories: Object.keys(categories).map(category => categories[category])
-  };
-}
-
-export default connect(mapStateToProps)(Root);
+export default Root;

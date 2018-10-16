@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { handleInitialData } from "./actions/shared";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Root from "./views/Root";
+import LoadingBar from "react-redux-loading";
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());
@@ -12,6 +14,7 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
+          <LoadingBar />
           {this.props.loading === true ? null : (
             <div>
               <Route path="/" exact component={Root} />
