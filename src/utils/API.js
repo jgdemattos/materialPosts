@@ -18,9 +18,27 @@ export const getAllCategories = () =>
     .then(data => data.books);
     */
 
-export const getInitialData = () =>
+export function getInitialData() {
+  return Promise.all([getCategories(), getPosts()]).then(
+    ([categories, posts]) => {
+      return {
+        categories: categories.categories,
+        posts: posts
+      };
+    }
+  );
+}
+
+export const getCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
-    .then(data => {
-      return data;
+    .then(categories => {
+      return categories;
+    });
+
+export const getPosts = () =>
+  fetch(`${api}/posts`, { headers })
+    .then(res => res.json())
+    .then(posts => {
+      return posts;
     });

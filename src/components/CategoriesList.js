@@ -7,7 +7,7 @@ class CategoriesList extends Component {
   render() {
     const { categories } = this.props;
     return (
-      <div className="categories-list">
+      <div className="categoriesList">
         <Grid container spacing={40} direction={"row"} justify={"center"}>
           {categories.map(category => (
             <Grid item key={category.name}>
