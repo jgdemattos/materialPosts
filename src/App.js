@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Root from "./views/Root";
 import LoadingBar from "react-redux-loading";
 import AppBar from "./components/AppBar";
-
+import "./App.css";
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());

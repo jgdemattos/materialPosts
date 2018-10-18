@@ -23,7 +23,7 @@ export function getInitialData() {
     ([categories, posts]) => {
       return {
         categories: categories.categories,
-        posts: posts
+        posts
       };
     }
   );
@@ -41,4 +41,11 @@ export const getPosts = () =>
     .then(res => res.json())
     .then(posts => {
       return posts;
+    });
+
+export const getComments = postId =>
+  fetch(`${api}/posts/${postId}/comments`, { headers })
+    .then(res => res.json())
+    .then(comments => {
+      return comments;
     });
