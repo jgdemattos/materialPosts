@@ -20,6 +20,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ThumbUpAlt from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownAlt from "@material-ui/icons/ThumbDownAlt";
 import { receiveComments } from "../actions/comments";
+import CommentsList from "./CommentsList";
 const styles = theme => ({
   commentTag: {
     marginLeft: "auto"
@@ -70,7 +71,7 @@ class Post extends React.Component {
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>
-              R
+              {post.author[0]}
             </Avatar>
           }
           action={
@@ -79,7 +80,7 @@ class Post extends React.Component {
             </IconButton>
           }
           title={post.title}
-          subheader={post.timestamp}
+          subheader={post.timestamp + " - by " + post.author}
         />
         <CardMedia
           className={classes.media}
@@ -113,8 +114,7 @@ class Post extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography>comments are avaliable by props</Typography>
+            <CommentsList postId={post.id} />
           </CardContent>
         </Collapse>
       </Card>

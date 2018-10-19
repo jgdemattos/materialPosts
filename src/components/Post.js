@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
-class Posts extends Component {
+class Post extends Component {
   render() {
     const { post } = this.props;
     return <div className="post">{post.id}</div>;
