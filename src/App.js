@@ -14,15 +14,17 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Fragment>
-          <LoadingBar />
-          <AppBar />
-          {this.props.loading === true ? null : (
-            <div>
-              <Route path="/" exact component={Root} />
-            </div>
-          )}
-        </Fragment>
+        <div style={{ margin: 0 }}>
+          <Fragment>
+            <LoadingBar />
+            <AppBar />
+            {this.props.loading === true ? null : (
+              <div>
+                <Route path="/" exact component={Root} />
+              </div>
+            )}
+          </Fragment>
+        </div>
       </Router>
     );
   }

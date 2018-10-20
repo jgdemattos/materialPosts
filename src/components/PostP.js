@@ -14,16 +14,15 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import red from "@material-ui/core/colors/red";
-import ShareIcon from "@material-ui/icons/Share";
+import Score from "./Score";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import ThumbUpAlt from "@material-ui/icons/ThumbUpAlt";
-import ThumbDownAlt from "@material-ui/icons/ThumbDownAlt";
+
 import { receiveComments } from "../actions/comments";
 import CommentsList from "./CommentsList";
 const styles = theme => ({
   commentTag: {
-    marginLeft: "auto"
+    marginLeft: "150px"
   },
   card: {
     maxWidth: 400
@@ -91,16 +90,12 @@ class Post extends React.Component {
           <Typography component="p">{post.body}</Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Like">
-            <ThumbUpAlt />
-          </IconButton>
-          <IconButton aria-label="Dislike">
-            <ThumbDownAlt />
-          </IconButton>
-          <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton>
-          <Typography className={classes.commentTag}>Comments</Typography>
+          <Score type={"post"} id={post.id} />
+
+          <Typography className={classes.commentTag}>
+            {" "}
+            {post.commentCount} comments
+          </Typography>
           <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded
