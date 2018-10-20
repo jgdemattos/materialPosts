@@ -21,10 +21,12 @@ const styles = {
   score: {
     marginBottom: "-43px",
     marginLeft: "165px",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    border: "solid 1px #EEE",
+    borderRadius: "25px"
   },
   comment: {
-    marginTop: "10px"
+    marginTop: "15px"
   }
 };
 class Comment extends Component {
@@ -38,7 +40,7 @@ class Comment extends Component {
           </Typography>
           <div className={classes.comment}>{comment.body}</div>
           <div className={classes.score}>
-            <Score type="comment" id={comment.id} />
+            <Score contentType="comments" id={comment.id} />
           </div>
         </div>
       </div>
@@ -47,8 +49,7 @@ class Comment extends Component {
 }
 
 function mapStateToProps({ comments }, { id }) {
-  const key = Object.keys(comments).filter(c => comments[c].id == id);
-  let comment = comments[key];
+  let comment = comments[id];
 
   return {
     comment

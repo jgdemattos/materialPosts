@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { handleReceiveComments } from "../actions/comments";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import Card from "@material-ui/core/Card";
@@ -18,11 +17,10 @@ import Score from "./Score";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-import { receiveComments } from "../actions/comments";
 import CommentsList from "./CommentsList";
 const styles = theme => ({
   commentTag: {
-    marginLeft: "150px"
+    marginLeft: "145px"
   },
   card: {
     maxWidth: 400
@@ -90,7 +88,7 @@ class Post extends React.Component {
           <Typography component="p">{post.body}</Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
-          <Score type={"post"} id={post.id} />
+          <Score contentType={"posts"} id={post.id} />
 
           <Typography className={classes.commentTag}>
             {" "}
@@ -118,8 +116,7 @@ class Post extends React.Component {
 }
 
 function mapStateToProps({ posts }, { id }) {
-  const key = Object.keys(posts).filter(p => posts[p].id === id);
-  let post = posts[key];
+  let post = posts[id];
 
   const monthNames = [
     "January",

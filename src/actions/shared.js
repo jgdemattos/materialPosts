@@ -1,7 +1,6 @@
 import { getInitialData } from "../utils/API";
 import { receiveCategories } from "./categories";
 import { receivePosts } from "./posts";
-import { receiveComments } from "./comments";
 import { setAuthedUser } from "./authedUser";
 import { showLoading, hideLoading } from "react-redux-loading";
 

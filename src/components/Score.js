@@ -3,16 +3,38 @@ import { connect } from "react-redux";
 import ThumbUpAlt from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownAlt from "@material-ui/icons/ThumbDownAlt";
 import IconButton from "@material-ui/core/IconButton";
+import { handleVote } from "../actions/vote";
+
 class Score extends Component {
+  handleLike = e => {
+    e.preventDefault();
+
+    const { dispatch, id, contentType } = this.props;
+
+    //type = post or comment
+
+    return dispatch(
+      handleVote({
+        id: id,
+        vote: e.currentTarget.value,
+        contentType
+      })
+    );
+  };
+
   render() {
     const { scoreHolder } = this.props;
     return (
       <div className="score">
-        <IconButton aria-label="Like">
+        <IconButton value="upVote" aria-label="Like" onClick={this.handleLike}>
           <ThumbUpAlt />
         </IconButton>
         {scoreHolder.voteScore}
-        <IconButton aria-label="Dislike">
+        <IconButton
+          value="downVote"
+          aria-label="Dislike"
+          onClick={this.handleLike}
+        >
           <ThumbDownAlt />
         </IconButton>
       </div>
@@ -20,15 +42,12 @@ class Score extends Component {
   }
 }
 
-function mapStateToProps({ posts, comments }, { id, type }) {
-  const key =
-    type == "post"
-      ? Object.keys(posts).filter(p => posts[p].id == id)
-      : Object.keys(comments).filter(c => comments[c].id == id);
+function mapStateToProps({ posts, comments, authedUser }, { id, contentType }) {
+  let scoreHolder = contentType === "posts" ? posts[id] : comments[id];
 
-  let scoreHolder = type == "post" ? posts[key] : comments[key];
   return {
-    scoreHolder
+    scoreHolder,
+    authedUser
   };
 }
 

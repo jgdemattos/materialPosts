@@ -11,13 +11,6 @@ const headers = {
   Authorization: token
 };
 
-/*
-export const getAllCategories = () =>
-  fetch(`${api}/books`, { headers })
-    .then(res => res.json())
-    .then(data => data.books);
-    */
-
 export function getInitialData() {
   return Promise.all([getCategories(), getPosts()]).then(
     ([categories, posts]) => {
@@ -40,12 +33,30 @@ export const getPosts = () =>
   fetch(`${api}/posts`, { headers })
     .then(res => res.json())
     .then(posts => {
-      return posts;
+      let nPosts = {};
+      posts.forEach(post => {
+        nPosts[post.id] = post;
+      });
+      return nPosts;
     });
 
 export const getComments = postId =>
   fetch(`${api}/posts/${postId}/comments`, { headers })
     .then(res => res.json())
     .then(comments => {
-      return comments;
+      let nComments = {};
+      comments.forEach(comment => {
+        nComments[comment.id] = comment;
+      });
+      return nComments;
     });
+
+export const saveVote = ({ id, vote, contentType }) =>
+  fetch(`${api}/${contentType}/${id}`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ option: vote })
+  }).then(res => res.json());

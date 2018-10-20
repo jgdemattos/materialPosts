@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import Comment from "./Comment";
 
 class CommentsList extends Component {
@@ -24,7 +23,7 @@ class CommentsList extends Component {
 function mapStateToProps({ comments }, { postId }) {
   return {
     comments: Object.values(comments).filter(
-      comment => comment.parentId == postId
+      comment => comment.parentId === postId
     )
   };
 }
