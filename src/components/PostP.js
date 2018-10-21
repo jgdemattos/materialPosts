@@ -8,7 +8,6 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -16,8 +15,8 @@ import red from "@material-ui/core/colors/red";
 import Score from "./Score";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import PostFooter from "./PostFooter";
 
-import CommentsList from "./CommentsList";
 const styles = theme => ({
   commentTag: {
     marginLeft: "145px"
@@ -79,6 +78,7 @@ class Post extends React.Component {
           title={post.title}
           subheader={post.timestamp + " - by " + post.author}
         />
+
         <CardMedia
           className={classes.media}
           image="/static/images/cards/paella.jpg"
@@ -105,11 +105,8 @@ class Post extends React.Component {
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <CommentsList postId={post.id} />
-          </CardContent>
-        </Collapse>
+
+        <PostFooter postId={post.id} expanded={this.state.expanded} />
       </Card>
     );
   }

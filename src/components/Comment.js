@@ -9,7 +9,7 @@ const styles = {
     margin: 0,
     border: "solid 1px #CCC",
     padding: "20px",
-    borderRadius: "25px",
+    borderRadius: "4px",
     minWidth: "270px",
     fontSize: 14
   },
@@ -23,7 +23,7 @@ const styles = {
     marginLeft: "165px",
     backgroundColor: "white",
     border: "solid 1px #EEE",
-    borderRadius: "25px"
+    borderRadius: "4px"
   },
   comment: {
     marginTop: "15px"
