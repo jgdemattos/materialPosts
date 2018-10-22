@@ -8,7 +8,16 @@ class PostsList extends Component {
     const { postIds } = this.props;
     return (
       <div className="postsList">
-        <Grid container spacing={40} direction={"column"} justify={"center"}>
+        <Grid
+          style={{
+            margin: 0,
+            width: "100%"
+          }}
+          container
+          spacing={40}
+          direction={"column"}
+          justify={"center"}
+        >
           {postIds.map(id => (
             <Grid item key={id}>
               <PostP id={id} />

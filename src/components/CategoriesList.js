@@ -8,7 +8,16 @@ class CategoriesList extends Component {
     const { categories } = this.props;
     return (
       <div className="categoriesList">
-        <Grid container spacing={40} direction={"row"} justify={"center"}>
+        <Grid
+          style={{
+            margin: 0,
+            width: "100%"
+          }}
+          container
+          spacing={40}
+          direction={"row"}
+          justify={"center"}
+        >
           {categories.map(category => (
             <Grid item key={category.name}>
               <Button key={category.name} variant="outlined" color="primary">

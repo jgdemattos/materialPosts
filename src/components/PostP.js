@@ -19,7 +19,7 @@ import PostFooter from "./PostFooter";
 
 const styles = theme => ({
   commentTag: {
-    marginLeft: "145px"
+    width: "fit-content"
   },
   card: {
     maxWidth: 400

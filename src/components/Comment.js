@@ -3,30 +3,33 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Score from "./Score";
-
+import Paper from "@material-ui/core/Paper";
 const styles = {
   commentBody: {
     margin: 0,
     border: "solid 1px #CCC",
-    padding: "20px",
+    paddingTop: "20px",
     borderRadius: "4px",
     minWidth: "270px",
-    fontSize: 14
+    fontSize: 14,
+    paddingBottom: "50px"
   },
   authorName: {
     backgroundColor: "white",
-    marginTop: "-31px",
-    width: "fit-content"
+    marginTop: "-15px",
+    marginLeft: "10px",
+    width: "fit-content",
+    fontSize: 16,
+    color: "#7a7b7c"
   },
   score: {
-    marginBottom: "-43px",
-    marginLeft: "165px",
-    backgroundColor: "white",
-    border: "solid 1px #EEE",
-    borderRadius: "4px"
+    width: "fit-content",
+    float: "right",
+    marginRight: "-1px"
   },
   comment: {
-    marginTop: "15px"
+    marginTop: "15px",
+    marginLeft: "10px"
   }
 };
 class Comment extends Component {
@@ -34,7 +37,7 @@ class Comment extends Component {
     const { comment, classes } = this.props;
     return (
       <div className="comment">
-        <div className={classes.commentBody}>
+        <Paper className={classes.commentBody} elevation={1}>
           <Typography className={classes.authorName}>
             {comment.author}
           </Typography>
@@ -42,7 +45,7 @@ class Comment extends Component {
           <div className={classes.score}>
             <Score contentType="comments" id={comment.id} />
           </div>
-        </div>
+        </Paper>
       </div>
     );
   }

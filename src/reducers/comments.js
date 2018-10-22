@@ -1,4 +1,4 @@
-import { RECEIVE_COMMENTS } from "../actions/comments";
+import { RECEIVE_COMMENTS, CREATE_COMMENT } from "../actions/comments";
 
 import { COMMENT_VOTE } from "../actions/vote";
 
@@ -20,6 +20,13 @@ export default function comments(state = {}, action) {
               : (state[action.id].voteScore = state[action.id].voteScore - 1)
         }
       };
+    case CREATE_COMMENT:
+      console.log(action);
+      return {
+        ...state,
+        [action.comment.id]: action.comment
+      };
+
     default:
       return state;
   }

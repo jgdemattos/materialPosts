@@ -60,3 +60,13 @@ export const saveVote = ({ id, vote, contentType }) =>
     },
     body: JSON.stringify({ option: vote })
   }).then(res => res.json());
+
+export const saveComment = ({ parentId, timestamp, body, author, id }) =>
+  fetch(`${api}/comments`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ parentId, timestamp, body, author, id })
+  }).then(res => res.json());

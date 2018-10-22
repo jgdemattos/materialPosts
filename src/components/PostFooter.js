@@ -11,7 +11,7 @@ function PostFooter(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <CommentsList postId={postId} />
-          <Grid container justify={"center"}>
+          <Grid spacing={0} container justify={"center"}>
             <CommentCreate postId={postId} />
           </Grid>
         </CardContent>
