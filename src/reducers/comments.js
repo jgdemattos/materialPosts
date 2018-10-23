@@ -1,4 +1,9 @@
-import { RECEIVE_COMMENTS, CREATE_COMMENT } from "../actions/comments";
+import {
+  RECEIVE_COMMENTS,
+  CREATE_COMMENT,
+  REMOVE_COMMENT,
+  EDIT_COMMENT
+} from "../actions/comments";
 
 import { COMMENT_VOTE } from "../actions/vote";
 
@@ -21,10 +26,26 @@ export default function comments(state = {}, action) {
         }
       };
     case CREATE_COMMENT:
-      console.log(action);
       return {
         ...state,
         [action.comment.id]: action.comment
+      };
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          deleted: true
+        }
+      };
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        [action.comment.id]: {
+          ...state[action.comment.id],
+          body: action.comment.body,
+          timestamp: action.comment.timestamp
+        }
       };
 
     default:

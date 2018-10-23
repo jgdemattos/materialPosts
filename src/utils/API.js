@@ -70,3 +70,25 @@ export const saveComment = ({ parentId, timestamp, body, author, id }) =>
     },
     body: JSON.stringify({ parentId, timestamp, body, author, id })
   }).then(res => res.json());
+
+export const deleteComment = id => {
+  return fetch(`${api}/comments/${id}`, {
+    method: "DELETE",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ id })
+  }).then(res => res.json());
+};
+
+export const updateComment = ({ id, body, timestamp }) => {
+  return fetch(`${api}/comments/${id}`, {
+    method: "PUT",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ body, timestamp })
+  }).then(res => res.json());
+};

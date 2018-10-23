@@ -63,7 +63,7 @@ class Post extends React.Component {
   render() {
     const { classes, post } = this.props;
     return (
-      <Card className={classes.card}>
+      <Card className={classes.card} elevation={5}>
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>

@@ -9,11 +9,14 @@ class CommentsList extends Component {
     return (
       <div className="commentsList">
         <Grid container spacing={40} direction={"row"} justify={"center"}>
-          {comments.map(comment => (
-            <Grid item key={comment.id}>
-              <Comment id={comment.id} />
-            </Grid>
-          ))}
+          {comments.map(
+            comment =>
+              !comment.deleted ? (
+                <Grid item key={comment.id}>
+                  <Comment id={comment.id} />
+                </Grid>
+              ) : null
+          )}
         </Grid>
       </div>
     );
