@@ -5,7 +5,7 @@ import Send from "@material-ui/icons/Send";
 import IconButton from "@material-ui/core/IconButton";
 import { handleCreateComment, handleEditComment } from "../actions/comments";
 import { connect } from "react-redux";
-const styles = theme => ({
+const styles = {
   textField: {
     width: "270px",
     padding: 0
@@ -17,7 +17,7 @@ const styles = theme => ({
     marginLeft: "220px",
     padding: 0
   }
-});
+};
 
 class CommentCreate extends Component {
   state = {
@@ -45,10 +45,11 @@ class CommentCreate extends Component {
         parentId: postId,
         body: this.state.value
       })
-    ).then(() => this.setState({ value: "" }));
+    ).then(this.setState({ value: "" }));
   };
   render() {
     const { postId, classes, commentBody, commentId } = this.props;
+    console.log(this.state.value);
     return (
       <div className="commentCreate">
         <form onSubmit={this.handleSubmit} id={postId}>
@@ -58,6 +59,7 @@ class CommentCreate extends Component {
               label={commentId ? "Edit comment" : "Create comment"}
               multiline
               rows="2"
+              rowsMax="7"
               defaultValue={commentBody}
               className={classes.textField}
               margin="normal"

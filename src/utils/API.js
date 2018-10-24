@@ -92,3 +92,13 @@ export const updateComment = ({ id, body, timestamp }) => {
     body: JSON.stringify({ body, timestamp })
   }).then(res => res.json());
 };
+
+export const savePost = ({ body, title, timestamp, category, author, id }) =>
+  fetch(`${api}/posts`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ body, title, timestamp, category, author, id })
+  }).then(res => res.json());

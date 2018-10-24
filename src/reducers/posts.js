@@ -1,4 +1,4 @@
-import { RECEIVE_POSTS } from "../actions/posts";
+import { RECEIVE_POSTS, CREATE_POST } from "../actions/posts";
 
 import { POST_VOTE } from "../actions/vote";
 
@@ -19,6 +19,11 @@ export default function posts(state = {}, action) {
               ? (state[action.id].voteScore = state[action.id].voteScore + 1)
               : (state[action.id].voteScore = state[action.id].voteScore - 1)
         }
+      };
+    case CREATE_POST:
+      return {
+        ...state,
+        [action.post.id]: action.post
       };
     default:
       return state;

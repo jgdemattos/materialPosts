@@ -79,11 +79,11 @@ class Post extends React.Component {
           subheader={post.timestamp + " - by " + post.author}
         />
 
-        <CardMedia
+        {/*     <CardMedia
           className={classes.media}
           image="/static/images/cards/paella.jpg"
           title={post.title}
-        />
+        /> */}
         <CardContent>
           <Typography component="p">{post.body}</Typography>
         </CardContent>

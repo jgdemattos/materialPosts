@@ -4,6 +4,8 @@ import {
   deleteComment,
   updateComment
 } from "../utils/API";
+import { guid } from "../utils/helper";
+
 import { showLoading, hideLoading } from "react-redux-loading";
 
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
@@ -61,27 +63,6 @@ export function createComment(comment) {
   };
 }
 
-function guid() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-  return (
-    s4() +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    "-" +
-    s4() +
-    s4() +
-    s4()
-  );
-}
 export function handleCreateComment({ parentId, body }) {
   return (dispatch, getState) => {
     const { authedUser } = getState();

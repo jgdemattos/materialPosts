@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import PostP from "./PostP";
+import PostCreate from "./PostCreate";
 
 class PostsList extends Component {
   render() {
@@ -18,6 +19,9 @@ class PostsList extends Component {
           direction={"column"}
           justify={"center"}
         >
+          <Grid item>
+            <PostCreate />
+          </Grid>
           {postIds.map(id => (
             <Grid item key={id}>
               <PostP id={id} />
