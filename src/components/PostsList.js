@@ -3,10 +3,24 @@ import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import PostP from "./PostP";
 import PostCreate from "./PostCreate";
-
+import Card from "@material-ui/core/Card";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+import classnames from "classnames";
+const styles = {
+  cardPostCreate: {
+    padding: 20
+  },
+  sendButton: {
+    marginTop: "40px"
+  },
+  textField: {
+    width: "270px"
+  }
+};
 class PostsList extends Component {
   render() {
-    const { postIds } = this.props;
+    const { postIds, classes } = this.props;
     return (
       <div className="postsList">
         <Grid
@@ -20,7 +34,10 @@ class PostsList extends Component {
           justify={"center"}
         >
           <Grid item>
-            <PostCreate />
+            <Card elevation={5} className={classes.cardPostCreate}>
+              <Typography component="p">{"What's on your mind?"}</Typography>
+              <PostCreate />
+            </Card>
           </Grid>
           {postIds.map(id => (
             <Grid item key={id}>
@@ -39,4 +56,4 @@ function mapStateToProps({ posts }) {
   };
 }
 
-export default connect(mapStateToProps)(PostsList);
+export default connect(mapStateToProps)(withStyles(styles)(PostsList));

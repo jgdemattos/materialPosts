@@ -7,12 +7,9 @@ import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Send from "@material-ui/icons/Send";
-import { handleCreatePost } from "../actions/posts";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+import { handleCreatePost, handleEditPost } from "../actions/posts";
 import CategorySelect from "./CategorySelect";
+
 const styles = {
   cardPostCreate: {
     padding: 20
@@ -30,6 +27,14 @@ class PostCreate extends Component {
     postTitle: "",
     selectedCategory: ""
   };
+  componentDidMount() {
+    if (this.props.post) {
+      this.setState({
+        postBody: this.props.post.body,
+        postTitle: this.props.post.title
+      });
+    }
+  }
   handleChange = event => {
     this.setState({ selectedCategory: event.target.value });
   };
@@ -45,16 +50,17 @@ class PostCreate extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const { postId, dispatch, commentId, toggleEditComment } = this.props;
+    const { post, dispatch, handleToggleEdit } = this.props;
 
-    /*     if (commentId) {
+    if (post) {
       return dispatch(
-        handleEditComment({
-          id: commentId,
-          body: this.state.value
+        handleEditPost({
+          id: post.id,
+          body: this.state.postBody,
+          title: this.state.postTitle
         })
-      ).then(toggleEditComment());
-    } */
+      ).then(handleToggleEdit());
+    }
 
     return dispatch(
       handleCreatePost({
@@ -68,70 +74,74 @@ class PostCreate extends Component {
     const { post, classes, categories } = this.props;
     return (
       <div className="postCreate">
-        <Card className={classes.cardPostCreate} elevation={5}>
-          <Typography component="p">{"What's on your mind?"}</Typography>
-          <form onSubmit={this.handleSubmit}>
-            <Grid container spacing={0} direction={"column"}>
-              <Grid item>
-                <TextField
-                  id="standard-with-placeholder"
-                  label="Title"
-                  placeholder="Think of something nice"
-                  className={classes.title}
-                  name="postTitle"
-                  margin="normal"
-                  onChange={this.handleInputChange}
-                />
-              </Grid>
+        <form onSubmit={this.handleSubmit}>
+          <Grid container spacing={0} direction={"column"}>
+            <Grid item>
+              <TextField
+                id="standard-with-placeholder"
+                label="Title"
+                placeholder="Think of something nice"
+                className={classes.title}
+                name="postTitle"
+                margin="normal"
+                defaultValue={post ? post.title : ""}
+                onChange={this.handleInputChange}
+              />
+            </Grid>
+            {!post && (
               <Grid item>
                 <CategorySelect
                   handleChange={this.handleChange}
-                  selectedCategory={this.state.selectedCategory}
+                  selectedCategory={
+                    post ? post.category : this.state.selectedCategory
+                  }
                   categories={categories}
                 />
               </Grid>
+            )}
+          </Grid>
+          <Grid container spacing={0} direction={"row"}>
+            <Grid item>
+              <TextField
+                id="outlined-multiline-flexible"
+                label="New post"
+                multiline
+                name="postBody"
+                rows="3"
+                rowsMax="7"
+                //value={this.state.multiline}
+                onChange={this.handleInputChange}
+                defaultValue={post ? post.body : ""}
+                className={classes.textField}
+                margin="normal"
+                helperText=""
+                variant="outlined"
+              />
             </Grid>
-            <Grid container spacing={0} direction={"row"}>
-              <Grid item>
-                <TextField
-                  id="outlined-multiline-flexible"
-                  label="New post"
-                  multiline
-                  name="postBody"
-                  rows="3"
-                  rowsMax="7"
-                  //value={this.state.multiline}
-                  onChange={this.handleInputChange}
-                  //defaultValue={postBody}
-                  className={classes.textField}
-                  margin="normal"
-                  helperText=""
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item>
-                <IconButton
-                  aria-label="Send"
-                  fontSize="small"
-                  type="submit"
-                  //form={postId}
-                  value="Submit"
-                  className={classes.sendButton}
-                >
-                  <Send />
-                </IconButton>
-              </Grid>
+            <Grid item>
+              <IconButton
+                aria-label="Send"
+                fontSize="small"
+                type="submit"
+                //form={postId}
+                value="Submit"
+                className={classes.sendButton}
+              >
+                <Send />
+              </IconButton>
             </Grid>
-          </form>
-        </Card>
+          </Grid>
+        </form>
       </div>
     );
   }
 }
 
-function mapStateToProps({ categories }) {
+function mapStateToProps({ categories, posts }, { postId }) {
+  const post = posts[postId];
   return {
-    categories: Object.values(categories).map(category => category)
+    categories: Object.values(categories).map(category => category),
+    post
   };
 }
 

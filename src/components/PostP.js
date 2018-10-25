@@ -16,6 +16,8 @@ import Score from "./Score";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import PostFooter from "./PostFooter";
+import PostCardMenu from "./PostCardMenu";
+import PostCreate from "./PostCreate";
 
 const styles = theme => ({
   commentTag: {
@@ -46,11 +48,18 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  editPost: {
+    padding: "20px"
   }
 });
 
 class Post extends React.Component {
-  state = { expanded: false };
+  state = {
+    expanded: false,
+    anchorEl: null,
+    toggleEdit: false
+  };
 
   componentDidMount() {
     this.props.dispatch(handleReceiveComments(this.props.id));
@@ -60,6 +69,16 @@ class Post extends React.Component {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
+  handleOpenMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleCloseMenu = () => {
+    this.setState({ anchorEl: null });
+  };
+  handleToggleEdit = () => {
+    this.setState({ toggleEdit: !this.state.toggleEdit });
+  };
   render() {
     const { classes, post } = this.props;
     return (
@@ -71,42 +90,59 @@ class Post extends React.Component {
             </Avatar>
           }
           action={
-            <IconButton>
+            <IconButton
+              aria-owns={this.state.anchorEl ? "simple-menu" : null}
+              aria-haspopup="true"
+              onClick={this.handleOpenMenu}
+            >
               <MoreVertIcon />
             </IconButton>
           }
           title={post.title}
           subheader={post.timestamp + " - by " + post.author}
         />
-
+        <PostCardMenu
+          anchorEl={this.state.anchorEl}
+          handleCloseMenu={this.handleCloseMenu}
+          handleToggleEdit={this.handleToggleEdit}
+        />
         {/*     <CardMedia
           className={classes.media}
           image="/static/images/cards/paella.jpg"
           title={post.title}
         /> */}
-        <CardContent>
-          <Typography component="p">{post.body}</Typography>
-        </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing>
-          <Score contentType={"posts"} id={post.id} />
+        {this.state.toggleEdit ? (
+          <div className={classes.editPost}>
+            <PostCreate
+              postId={post.id}
+              handleToggleEdit={this.handleToggleEdit}
+            />
+          </div>
+        ) : (
+          <div>
+            <CardContent>
+              <Typography component="p">{post.body}</Typography>
+            </CardContent>
+            <CardActions className={classes.actions} disableActionSpacing>
+              <Score contentType={"posts"} id={post.id} />
 
-          <Typography className={classes.commentTag}>
-            {" "}
-            {post.commentCount} comments
-          </Typography>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-
-        <PostFooter postId={post.id} expanded={this.state.expanded} />
+              <Typography className={classes.commentTag}>
+                {post.commentCount} comments
+              </Typography>
+              <IconButton
+                className={classnames(classes.expand, {
+                  [classes.expandOpen]: this.state.expanded
+                })}
+                onClick={this.handleExpandClick}
+                aria-expanded={this.state.expanded}
+                aria-label="Show more"
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+            </CardActions>
+            <PostFooter postId={post.id} expanded={this.state.expanded} />
+          </div>
+        )}
       </Card>
     );
   }
