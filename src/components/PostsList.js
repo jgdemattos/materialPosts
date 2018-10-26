@@ -20,7 +20,7 @@ const styles = {
 };
 class PostsList extends Component {
   render() {
-    const { postIds, classes } = this.props;
+    const { posts, classes } = this.props;
     return (
       <div className="postsList">
         <Grid
@@ -39,11 +39,14 @@ class PostsList extends Component {
               <PostCreate />
             </Card>
           </Grid>
-          {postIds.map(id => (
-            <Grid item key={id}>
-              <PostP id={id} />
-            </Grid>
-          ))}
+          {posts.map(
+            post =>
+              !post.deleted && (
+                <Grid item key={post.id}>
+                  <PostP id={post.id} />
+                </Grid>
+              )
+          )}
         </Grid>
       </div>
     );
@@ -52,7 +55,7 @@ class PostsList extends Component {
 
 function mapStateToProps({ posts }) {
   return {
-    postIds: Object.keys(posts).map(p => posts[p].id)
+    posts: Object.values(posts).map(post => post)
   };
 }
 

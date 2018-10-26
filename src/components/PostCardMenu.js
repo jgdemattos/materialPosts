@@ -7,8 +7,12 @@ class PostCardMenu extends React.Component {
     this.props.handleCloseMenu();
     this.props.handleToggleEdit();
   };
+  handleRemove = () => {
+    this.props.handleCloseMenu();
+    this.props.handleRemovePostUI();
+  };
   render() {
-    const { anchorEl, handleCloseMenu, handleToggleEdit } = this.props;
+    const { anchorEl, handleCloseMenu } = this.props;
 
     return (
       <div>
@@ -19,7 +23,7 @@ class PostCardMenu extends React.Component {
           onClose={handleCloseMenu}
         >
           <MenuItem onClick={this.toggleEdit}>Editar</MenuItem>
-          <MenuItem onClick={handleCloseMenu}>Excluir</MenuItem>
+          <MenuItem onClick={this.handleRemove}>Excluir</MenuItem>
         </Menu>
       </div>
     );

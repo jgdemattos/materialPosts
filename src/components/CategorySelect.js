@@ -62,7 +62,11 @@ class SimpleSelect extends React.Component {
             <em>None</em>
           </MenuItem>
           {categories.map(category => {
-            return <MenuItem value={category.name}>{category.name}</MenuItem>;
+            return (
+              <MenuItem key={category.name} value={category.name}>
+                {category.name}
+              </MenuItem>
+            );
           })}
         </Select>
       </FormControl>

@@ -113,3 +113,14 @@ export const savePost = ({ body, title, timestamp, category, author, id }) =>
     },
     body: JSON.stringify({ body, title, timestamp, category, author, id })
   }).then(res => res.json());
+
+export const deletePost = id => {
+  return fetch(`${api}/posts/${id}`, {
+    method: "DELETE",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ id })
+  }).then(res => res.json());
+};

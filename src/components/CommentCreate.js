@@ -49,7 +49,6 @@ class CommentCreate extends Component {
   };
   render() {
     const { postId, classes, commentBody, commentId } = this.props;
-    console.log(this.state.value);
     return (
       <div className="commentCreate">
         <form onSubmit={this.handleSubmit} id={postId}>

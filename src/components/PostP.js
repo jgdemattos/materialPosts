@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { handleReceiveComments } from "../actions/comments";
+import { handleRemovePost } from "../actions/posts";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import Card from "@material-ui/core/Card";
@@ -79,6 +80,15 @@ class Post extends React.Component {
   handleToggleEdit = () => {
     this.setState({ toggleEdit: !this.state.toggleEdit });
   };
+  handleRemovePostUI = () => {
+    const { post, dispatch } = this.props;
+
+    return dispatch(
+      handleRemovePost({
+        id: post.id
+      })
+    );
+  };
   render() {
     const { classes, post } = this.props;
     return (
@@ -105,6 +115,7 @@ class Post extends React.Component {
           anchorEl={this.state.anchorEl}
           handleCloseMenu={this.handleCloseMenu}
           handleToggleEdit={this.handleToggleEdit}
+          handleRemovePostUI={this.handleRemovePostUI}
         />
         {/*     <CardMedia
           className={classes.media}

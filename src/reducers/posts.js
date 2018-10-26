@@ -1,4 +1,9 @@
-import { RECEIVE_POSTS, CREATE_POST, EDIT_POST } from "../actions/posts";
+import {
+  RECEIVE_POSTS,
+  CREATE_POST,
+  EDIT_POST,
+  REMOVE_POST
+} from "../actions/posts";
 
 import { POST_VOTE } from "../actions/vote";
 
@@ -34,6 +39,15 @@ export default function posts(state = {}, action) {
           title: action.post.title
         }
       };
+    case REMOVE_POST: {
+      return {
+        ...state,
+        [action.post.id]: {
+          ...state[action.post.id],
+          deleted: true
+        }
+      };
+    }
     default:
       return state;
   }
