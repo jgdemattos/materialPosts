@@ -19,7 +19,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import PostFooter from "./PostFooter";
 import PostCardMenu from "./PostCardMenu";
 import PostCreate from "./PostCreate";
-
+import { Link, withRouter } from "react-router-dom";
 const styles = theme => ({
   commentTag: {
     width: "fit-content"
@@ -52,6 +52,9 @@ const styles = theme => ({
   },
   editPost: {
     padding: "20px"
+  },
+  cardHeaderLink: {
+    textDecoration: "none"
   }
 });
 
@@ -93,24 +96,29 @@ class Post extends React.Component {
     const { classes, post } = this.props;
     return (
       <Card className={classes.card} elevation={5}>
-        <CardHeader
-          avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              {post.author[0]}
-            </Avatar>
-          }
-          action={
-            <IconButton
-              aria-owns={this.state.anchorEl ? "simple-menu" : null}
-              aria-haspopup="true"
-              onClick={this.handleOpenMenu}
-            >
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={post.title}
-          subheader={post.timestamp + " - by " + post.author}
-        />
+        <Link
+          className={classes.cardHeaderLink}
+          to={`/${post.category}/${post.id}`}
+        >
+          <CardHeader
+            avatar={
+              <Avatar aria-label="Recipe" className={classes.avatar}>
+                {post.author[0].toUpperCase()}
+              </Avatar>
+            }
+            action={
+              <IconButton
+                aria-owns={this.state.anchorEl ? "simple-menu" : null}
+                aria-haspopup="true"
+                onClick={this.handleOpenMenu}
+              >
+                <MoreVertIcon />
+              </IconButton>
+            }
+            title={post.title}
+            subheader={post.timestamp + " - by " + post.author}
+          />
+        </Link>
         <PostCardMenu
           anchorEl={this.state.anchorEl}
           handleCloseMenu={this.handleCloseMenu}

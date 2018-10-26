@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { handleInitialData } from "./actions/shared";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Root from "./views/Root";
+import PostDetails from "./views/PostDetails";
 import LoadingBar from "react-redux-loading";
 import AppBar from "./components/AppBar";
 import "./App.css";
@@ -21,6 +22,11 @@ class App extends Component {
             {this.props.loading === true ? null : (
               <div>
                 <Route path="/" exact component={Root} />
+                <Route
+                  path="/:category/:postId"
+                  exact
+                  component={PostDetails}
+                />
               </div>
             )}
           </Fragment>
