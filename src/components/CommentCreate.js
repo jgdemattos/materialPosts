@@ -5,6 +5,8 @@ import Send from "@material-ui/icons/Send";
 import IconButton from "@material-ui/core/IconButton";
 import { handleCreateComment, handleEditComment } from "../actions/comments";
 import { connect } from "react-redux";
+import ReactLoading from "react-loading";
+import Grid from "@material-ui/core/Grid";
 const styles = {
   textField: {
     width: "270px",
@@ -21,7 +23,8 @@ const styles = {
 
 class CommentCreate extends Component {
   state = {
-    value: ""
+    value: "",
+    submitted: false
   };
   handleChange = e => {
     this.setState({ value: e.target.value });
@@ -45,10 +48,23 @@ class CommentCreate extends Component {
         parentId: postId,
         body: this.state.value
       })
-    ).then(this.setState({ value: "" }));
+    ).then(() =>
+      this.setState({ postBody: "", submitted: !this.state.submitted }, () => {
+        this.timeout = setTimeout(() => {
+          this.setState({ submitted: false });
+        }, 3000);
+      })
+    );
   };
   render() {
     const { postId, classes, commentBody, commentId } = this.props;
+    if (this.state.submitted) {
+      return (
+        <Grid container direction={"row"} justify={"center"}>
+          {"Comment registered"}
+        </Grid>
+      );
+    }
     return (
       <div className="commentCreate">
         <form onSubmit={this.handleSubmit} id={postId}>

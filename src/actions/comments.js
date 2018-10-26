@@ -19,10 +19,10 @@ export function receiveComments(comments) {
     comments
   };
 }
-export function removeComment(id) {
+export function removeComment(comment) {
   return {
     type: REMOVE_COMMENT,
-    id
+    comment
   };
 }
 
@@ -31,7 +31,7 @@ export function handleRemoveComment({ id }) {
     dispatch(showLoading());
     return deleteComment(id)
       .then(comment => {
-        dispatch(removeComment(comment.id));
+        dispatch(removeComment(comment));
       })
       .then(() => dispatch(hideLoading()));
   };

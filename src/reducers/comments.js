@@ -33,8 +33,8 @@ export default function comments(state = {}, action) {
     case REMOVE_COMMENT:
       return {
         ...state,
-        [action.id]: {
-          ...state[action.id],
+        [action.comment.id]: {
+          ...state[action.comment.id],
           deleted: true
         }
       };

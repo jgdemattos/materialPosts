@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Send from "@material-ui/icons/Send";
 import { handleCreatePost, handleEditPost } from "../actions/posts";
 import CategorySelect from "./CategorySelect";
-
+import ReactLoading from "react-loading";
 const styles = {
   cardPostCreate: {
     padding: 20
@@ -25,7 +25,8 @@ class PostCreate extends Component {
   state = {
     postBody: "",
     postTitle: "",
-    selectedCategory: ""
+    selectedCategory: "",
+    submitted: false
   };
   componentDidMount() {
     if (this.props.post) {
@@ -35,6 +36,7 @@ class PostCreate extends Component {
       });
     }
   }
+
   handleChange = event => {
     this.setState({ selectedCategory: event.target.value });
   };
@@ -68,10 +70,23 @@ class PostCreate extends Component {
         title: this.state.postTitle,
         category: this.state.selectedCategory
       })
-    ).then(this.setState({ body: "" }));
+    ).then(() =>
+      this.setState({ postBody: "", submitted: !this.state.submitted }, () => {
+        this.timeout = setTimeout(() => {
+          this.setState({ submitted: false });
+        }, 3000);
+      })
+    );
   };
   render() {
     const { post, classes, categories } = this.props;
+    if (this.state.submitted) {
+      return (
+        <Grid container direction={"row"} justify={"center"}>
+          <ReactLoading type={"bars"} color="#f4b042" />
+        </Grid>
+      );
+    }
     return (
       <div className="postCreate">
         <form onSubmit={this.handleSubmit}>
