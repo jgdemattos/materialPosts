@@ -1,25 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
 import { handleReceiveComments } from "../actions/comments";
-import { handleRemovePost } from "../actions/posts";
+
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
+
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Avatar from "@material-ui/core/Avatar";
+
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import red from "@material-ui/core/colors/red";
 import Score from "./Score";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+
 import PostFooter from "./PostFooter";
-import PostCardMenu from "./PostCardMenu";
+
 import PostCreate from "./PostCreate";
-import { Link, withRouter } from "react-router-dom";
+import PostHeader from "./PostHeader";
+
 const styles = theme => ({
   commentTag: {
     width: "fit-content"
@@ -47,22 +48,15 @@ const styles = theme => ({
   expandOpen: {
     transform: "rotate(180deg)"
   },
-  avatar: {
-    backgroundColor: red[500]
-  },
+
   editPost: {
     padding: "20px"
-  },
-  cardHeaderLink: {
-    textDecoration: "none"
   }
 });
 
 class Post extends React.Component {
   state = {
-    expanded: false,
-    anchorEl: null,
-    toggleEdit: false
+    expanded: false
   };
 
   componentDidMount() {
@@ -73,57 +67,18 @@ class Post extends React.Component {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
-  handleOpenMenu = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleCloseMenu = () => {
-    this.setState({ anchorEl: null });
-  };
   handleToggleEdit = () => {
     this.setState({ toggleEdit: !this.state.toggleEdit });
   };
-  handleRemovePostUI = () => {
-    const { post, dispatch } = this.props;
 
-    return dispatch(
-      handleRemovePost({
-        id: post.id
-      })
-    );
-  };
   render() {
-    const { classes, post } = this.props;
+    const { classes, post, authedUser } = this.props;
     return (
       <Card className={classes.card} elevation={5}>
-        <Link
-          className={classes.cardHeaderLink}
-          to={`/${post.category}/${post.id}`}
-        >
-          <CardHeader
-            avatar={
-              <Avatar aria-label="Recipe" className={classes.avatar}>
-                {post.author[0].toUpperCase()}
-              </Avatar>
-            }
-            action={
-              <IconButton
-                aria-owns={this.state.anchorEl ? "simple-menu" : null}
-                aria-haspopup="true"
-                onClick={this.handleOpenMenu}
-              >
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title={post.title}
-            subheader={post.timestamp + " - by " + post.author}
-          />
-        </Link>
-        <PostCardMenu
-          anchorEl={this.state.anchorEl}
-          handleCloseMenu={this.handleCloseMenu}
+        <PostHeader
+          post={post}
           handleToggleEdit={this.handleToggleEdit}
-          handleRemovePostUI={this.handleRemovePostUI}
+          authedUser={authedUser}
         />
         {/*     <CardMedia
           className={classes.media}
@@ -167,7 +122,7 @@ class Post extends React.Component {
   }
 }
 
-function mapStateToProps({ posts }, { id }) {
+function mapStateToProps({ posts, authedUser }, { id }) {
   let post = posts[id];
 
   const monthNames = [
@@ -201,7 +156,8 @@ function mapStateToProps({ posts }, { id }) {
   post.timestamp = formattedTime;
 
   return {
-    post
+    post,
+    authedUser
   };
 }
 

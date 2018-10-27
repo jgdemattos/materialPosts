@@ -7,6 +7,7 @@ import {
 import { guid } from "../utils/helper";
 
 import { showLoading, hideLoading } from "react-redux-loading";
+import { updateCommentCount } from "./posts";
 
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 export const CREATE_COMMENT = "CREATE_COMMENT";
@@ -65,9 +66,10 @@ export function createComment(comment) {
 
 export function handleCreateComment({ parentId, body }) {
   return (dispatch, getState) => {
-    const { authedUser } = getState();
+    const { authedUser, posts } = getState();
     const timestamp = Date.now();
-    var id = guid();
+    let id = guid();
+    let post = posts[parentId];
     dispatch(showLoading());
     return saveComment({
       parentId,
@@ -78,6 +80,7 @@ export function handleCreateComment({ parentId, body }) {
     })
       .then(comment => {
         dispatch(createComment(comment));
+        dispatch(updateCommentCount(post));
       })
       .then(() => dispatch(hideLoading()));
   };

@@ -2,7 +2,8 @@ import {
   RECEIVE_POSTS,
   CREATE_POST,
   EDIT_POST,
-  REMOVE_POST
+  REMOVE_POST,
+  UPDATE_COMMENT_COUNT
 } from "../actions/posts";
 
 import { POST_VOTE } from "../actions/vote";
@@ -48,6 +49,14 @@ export default function posts(state = {}, action) {
         }
       };
     }
+    case UPDATE_COMMENT_COUNT:
+      return {
+        ...state,
+        [action.post.id]: {
+          ...state[action.post.id],
+          commentCount: state[action.post.id].commentCount + 1
+        }
+      };
     default:
       return state;
   }

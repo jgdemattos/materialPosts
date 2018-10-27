@@ -9,7 +9,8 @@ class PostDetails extends Component {
         <Grid
           style={{
             margin: 0,
-            width: "100%"
+            width: "100%",
+            marginTop: "100px"
           }}
           container
           spacing={40}

@@ -17,7 +17,6 @@ class App extends Component {
       <div style={{ margin: 0 }}>
         <Router>
           <Fragment>
-            <LoadingBar />
             <AppBar />
             {this.props.loading === true ? null : (
               <div>

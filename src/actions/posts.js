@@ -5,6 +5,7 @@ export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const CREATE_POST = "CREATE_POST";
 export const EDIT_POST = "EDIT_POST";
 export const REMOVE_POST = "REMOVE_POST";
+export const UPDATE_COMMENT_COUNT = "UPDATE_COMMENT_COUNT";
 
 export function receivePosts(posts) {
   return {
@@ -44,6 +45,13 @@ export function handleCreatePost({ body, title, category }) {
 export function editPost(post) {
   return {
     type: EDIT_POST,
+    post
+  };
+}
+
+export function updateCommentCount(post) {
+  return {
+    type: UPDATE_COMMENT_COUNT,
     post
   };
 }
