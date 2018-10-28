@@ -40,7 +40,13 @@ class PostHeader extends Component {
     );
   };
   render() {
-    const { post, handleToggleEdit, authedUser, classes } = this.props;
+    const {
+      post,
+      handleToggleEdit,
+      authedUser,
+      classes,
+      formattedTime
+    } = this.props;
     return (
       <div className="postHeader">
         <CardHeader
@@ -59,7 +65,7 @@ class PostHeader extends Component {
             </IconButton>
           }
           title={post.title}
-          subheader={post.timestamp + " - by " + post.author}
+          subheader={formattedTime + " - by " + post.author}
         />
 
         <PostCardMenu

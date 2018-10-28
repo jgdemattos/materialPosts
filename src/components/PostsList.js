@@ -6,7 +6,8 @@ import PostCreate from "./PostCreate";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-import classnames from "classnames";
+import OrderSelect from "./OrderSelect";
+import { sortPostsBy } from "../actions/posts";
 const styles = {
   cardPostCreate: {
     padding: 20
@@ -19,6 +20,12 @@ const styles = {
   }
 };
 class PostsList extends Component {
+  state = {};
+  orderBy = order => {
+    const { dispatch } = this.props;
+
+    dispatch(sortPostsBy(order));
+  };
   render() {
     const { posts, classes } = this.props;
     return (
@@ -39,6 +46,7 @@ class PostsList extends Component {
               <PostCreate />
             </Card>
           </Grid>
+          <OrderSelect orderBy={this.orderBy} order={this.state.order} />
           {posts.map(
             post =>
               !post.deleted && (

@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Send from "@material-ui/icons/Send";
 import { handleCreatePost, handleEditPost } from "../actions/posts";
 import CategorySelect from "./CategorySelect";
 import ReactLoading from "react-loading";
+import { Redirect } from "react-router-dom";
 const styles = {
   cardPostCreate: {
     padding: 20
@@ -26,7 +25,8 @@ class PostCreate extends Component {
     postBody: "",
     postTitle: "",
     selectedCategory: "",
-    submitted: false
+    submitted: false,
+    toHome: false
   };
   componentDidMount() {
     if (this.props.post) {
@@ -61,7 +61,9 @@ class PostCreate extends Component {
           body: this.state.postBody,
           title: this.state.postTitle
         })
-      ).then(handleToggleEdit());
+      ).then(
+        handleToggleEdit ? handleToggleEdit() : this.setState({ toHome: true })
+      );
     }
 
     return dispatch(
@@ -74,12 +76,15 @@ class PostCreate extends Component {
       this.setState({ postBody: "", submitted: !this.state.submitted }, () => {
         this.timeout = setTimeout(() => {
           this.setState({ submitted: false });
-        }, 3000);
+        }, 1000);
       })
     );
   };
   render() {
     const { post, classes, categories } = this.props;
+    if (this.state.toHome === true) {
+      return <Redirect to="/" />;
+    }
     if (this.state.submitted) {
       return (
         <Grid container direction={"row"} justify={"center"}>

@@ -1,23 +1,19 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { handleReceiveComments } from "../actions/comments";
 
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import Card from "@material-ui/core/Card";
-
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-
+import Edit from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import red from "@material-ui/core/colors/red";
 import Score from "./Score";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
 import PostFooter from "./PostFooter";
-
 import PostCreate from "./PostCreate";
 import PostHeader from "./PostHeader";
 
@@ -48,9 +44,11 @@ const styles = theme => ({
   expandOpen: {
     transform: "rotate(180deg)"
   },
-
   editPost: {
     padding: "20px"
+  },
+  editPostIcon: {
+    float: "right"
   }
 });
 
@@ -72,13 +70,14 @@ class Post extends React.Component {
   };
 
   render() {
-    const { classes, post, authedUser } = this.props;
+    const { classes, post, authedUser, formattedTime } = this.props;
     return (
       <Card className={classes.card} elevation={5}>
         <PostHeader
           post={post}
           handleToggleEdit={this.handleToggleEdit}
           authedUser={authedUser}
+          formattedTime={formattedTime}
         />
         {/*     <CardMedia
           className={classes.media}
@@ -97,6 +96,7 @@ class Post extends React.Component {
             <CardContent>
               <Typography component="p">{post.body}</Typography>
             </CardContent>
+
             <CardActions className={classes.actions} disableActionSpacing>
               <Score contentType={"posts"} id={post.id} />
 
@@ -113,6 +113,17 @@ class Post extends React.Component {
               >
                 <ExpandMoreIcon />
               </IconButton>
+              {authedUser === post.author && (
+                <div className={classes.editPostIcon}>
+                  <IconButton
+                    aria-label="Edit"
+                    fontSize="small"
+                    onClick={this.handleToggleEdit}
+                  >
+                    <Edit />
+                  </IconButton>
+                </div>
+              )}
             </CardActions>
             <PostFooter postId={post.id} expanded={this.state.expanded} />
           </div>
@@ -145,7 +156,7 @@ function mapStateToProps({ posts, authedUser }, { id }) {
   var formattedTime =
     monthNames[date.getMonth()] +
     " " +
-    date.getDay() +
+    date.getDate() +
     ", " +
     date.getFullYear() +
     " " +
@@ -153,11 +164,10 @@ function mapStateToProps({ posts, authedUser }, { id }) {
     ":" +
     ("0" + date.getMinutes()).substr(-2);
 
-  post.timestamp = formattedTime;
-
   return {
     post,
-    authedUser
+    authedUser,
+    formattedTime
   };
 }
 

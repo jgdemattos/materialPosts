@@ -6,6 +6,14 @@ export const CREATE_POST = "CREATE_POST";
 export const EDIT_POST = "EDIT_POST";
 export const REMOVE_POST = "REMOVE_POST";
 export const UPDATE_COMMENT_COUNT = "UPDATE_COMMENT_COUNT";
+export const SORT_POSTS = "SORT_POSTS";
+
+export function sortPostsBy(order) {
+  return {
+    type: SORT_POSTS,
+    order
+  };
+}
 
 export function receivePosts(posts) {
   return {

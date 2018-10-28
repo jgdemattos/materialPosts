@@ -37,14 +37,18 @@ class PostCardMenu extends React.Component {
         >
           {ownPost && (
             <Fragment>
-              <MenuItem onClick={this.toggleEdit}>Editar</MenuItem>
               <MenuItem onClick={this.handleRemove}>Excluir</MenuItem>
-              <MenuItem>edit</MenuItem>
+              <Link
+                className={classes.cardHeaderLink}
+                to={`/form/${postCategory}/${postId}`}
+              >
+                <MenuItem>Edit</MenuItem>
+              </Link>
             </Fragment>
           )}
           <Link
             className={classes.cardHeaderLink}
-            to={`/${postCategory}/${postId}`}
+            to={`/detail/${postCategory}/${postId}`}
           >
             <MenuItem>view</MenuItem>
           </Link>

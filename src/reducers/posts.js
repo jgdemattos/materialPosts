@@ -3,7 +3,8 @@ import {
   CREATE_POST,
   EDIT_POST,
   REMOVE_POST,
-  UPDATE_COMMENT_COUNT
+  UPDATE_COMMENT_COUNT,
+  SORT_POSTS
 } from "../actions/posts";
 
 import { POST_VOTE } from "../actions/vote";
@@ -56,6 +57,22 @@ export default function posts(state = {}, action) {
           ...state[action.post.id],
           commentCount: state[action.post.id].commentCount + 1
         }
+      };
+    case SORT_POSTS:
+      let order = action.order;
+
+      //sorts only the values
+      let sortedValues = Object.values(state).sort((a, b) => {
+        return b[order] - a[order];
+      });
+
+      //aplies id as the key
+      let sortedPosts = {};
+      sortedValues.forEach(element => {
+        sortedPosts[element.id] = element;
+      });
+      return {
+        ...sortedPosts
       };
     default:
       return state;

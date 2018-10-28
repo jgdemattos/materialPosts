@@ -6,6 +6,8 @@ import Root from "./views/Root";
 import PostDetails from "./views/PostDetails";
 import LoadingBar from "react-redux-loading";
 import AppBar from "./components/AppBar";
+import PostForm from "./views/PostForm";
+
 import "./App.css";
 class App extends Component {
   componentDidMount() {
@@ -22,10 +24,16 @@ class App extends Component {
               <div>
                 <Route path="/" exact component={Root} />
                 <Route
-                  path="/:category/:postId"
+                  path="/detail/:category/:postId"
                   exact
                   component={PostDetails}
                 />
+                <Route
+                  path="/form/:category/:postId"
+                  exact
+                  component={PostForm}
+                />
+                <Route path="/form/:category/" exact component={PostForm} />
               </div>
             )}
           </Fragment>
