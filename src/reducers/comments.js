@@ -2,7 +2,8 @@ import {
   RECEIVE_COMMENTS,
   CREATE_COMMENT,
   REMOVE_COMMENT,
-  EDIT_COMMENT
+  EDIT_COMMENT,
+  SET_PARENT_DELETED
 } from "../actions/comments";
 
 import { COMMENT_VOTE } from "../actions/vote";
@@ -47,7 +48,22 @@ export default function comments(state = {}, action) {
           timestamp: action.comment.timestamp
         }
       };
+    case SET_PARENT_DELETED:
+      let toSet = Object.values(state).filter(comment => {
+        return comment.parentId === action.post.id;
+      });
 
+      //aplies id as the key
+      let parentLessComments = {};
+      toSet.forEach(element => {
+        element.parentDeleted = true;
+        parentLessComments[element.id] = element;
+      });
+
+      return {
+        ...state,
+        ...parentLessComments
+      };
     default:
       return state;
   }

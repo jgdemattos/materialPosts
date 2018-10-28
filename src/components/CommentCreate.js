@@ -5,7 +5,6 @@ import Send from "@material-ui/icons/Send";
 import IconButton from "@material-ui/core/IconButton";
 import { handleCreateComment, handleEditComment } from "../actions/comments";
 import { connect } from "react-redux";
-import ReactLoading from "react-loading";
 import Grid from "@material-ui/core/Grid";
 const styles = {
   textField: {

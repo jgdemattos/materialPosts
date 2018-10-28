@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import CategoriesList from "../components/CategoriesList";
 import PostCreate from "../components/PostCreate";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";

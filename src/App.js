@@ -1,17 +1,20 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "./actions/shared";
+import { sortPostsBy } from "./actions/posts";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Root from "./views/Root";
 import PostDetails from "./views/PostDetails";
-import LoadingBar from "react-redux-loading";
 import AppBar from "./components/AppBar";
 import PostForm from "./views/PostForm";
 
 import "./App.css";
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    const { dispatch } = this.props;
+    dispatch(handleInitialData()).then(() =>
+      dispatch(sortPostsBy("timestamp"))
+    );
   }
 
   render() {

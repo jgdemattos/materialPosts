@@ -13,6 +13,7 @@ export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 export const CREATE_COMMENT = "CREATE_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
+export const SET_PARENT_DELETED = "SET_PARENT_DELETED";
 
 export function receiveComments(comments) {
   return {
@@ -26,7 +27,12 @@ export function removeComment(comment) {
     comment
   };
 }
-
+export function setParentDeleted(post) {
+  return {
+    type: SET_PARENT_DELETED,
+    post
+  };
+}
 export function handleRemoveComment({ id }) {
   return dispatch => {
     dispatch(showLoading());

@@ -1,6 +1,8 @@
 import { showLoading, hideLoading } from "react-redux-loading";
 import { savePost, updatePost, deletePost } from "../utils/API";
 import { guid } from "../utils/helper";
+import { setParentDeleted } from "./comments";
+
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const CREATE_POST = "CREATE_POST";
 export const EDIT_POST = "EDIT_POST";
@@ -92,6 +94,7 @@ export function handleRemovePost({ id }) {
     return deletePost(id)
       .then(post => {
         dispatch(removePost(post));
+        dispatch(setParentDeleted(post));
       })
       .then(() => dispatch(hideLoading()));
   };
