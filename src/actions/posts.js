@@ -48,6 +48,7 @@ export function handleCreatePost({ body, title, category }) {
       .then(post => {
         dispatch(createPost(post));
       })
+      .then(() => dispatch(sortPostsBy("voteScore")))
       .then(() => dispatch(hideLoading()));
   };
 }

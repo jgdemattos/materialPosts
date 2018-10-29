@@ -13,7 +13,7 @@ class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(handleInitialData()).then(() =>
-      dispatch(sortPostsBy("timestamp"))
+      dispatch(sortPostsBy("voteScore"))
     );
   }
 

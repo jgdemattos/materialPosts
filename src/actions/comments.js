@@ -14,11 +14,18 @@ export const CREATE_COMMENT = "CREATE_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const SET_PARENT_DELETED = "SET_PARENT_DELETED";
+export const SORT_COMMENTS = "SORT_COMMENTS";
 
 export function receiveComments(comments) {
   return {
     type: RECEIVE_COMMENTS,
     comments
+  };
+}
+export function sortComments(order) {
+  return {
+    type: SORT_COMMENTS,
+    order
   };
 }
 export function removeComment(comment) {
@@ -88,6 +95,7 @@ export function handleCreateComment({ parentId, body }) {
         dispatch(createComment(comment));
         dispatch(updateCommentCount(post));
       })
+      .then(() => dispatch(sortComments("voteScore")))
       .then(() => dispatch(hideLoading()));
   };
 }
@@ -99,6 +107,7 @@ export function handleReceiveComments(postId) {
       .then(comments => {
         dispatch(receiveComments(comments));
       })
+      .then(() => dispatch(sortComments("voteScore")))
       .then(() => dispatch(hideLoading()));
   };
 }

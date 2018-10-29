@@ -3,7 +3,8 @@ import {
   CREATE_COMMENT,
   REMOVE_COMMENT,
   EDIT_COMMENT,
-  SET_PARENT_DELETED
+  SET_PARENT_DELETED,
+  SORT_COMMENTS
 } from "../actions/comments";
 
 import { COMMENT_VOTE } from "../actions/vote";
@@ -63,6 +64,22 @@ export default function comments(state = {}, action) {
       return {
         ...state,
         ...parentLessComments
+      };
+    case SORT_COMMENTS:
+      let order = action.order;
+
+      //sorts only the values
+      let sortedValues = Object.values(state).sort((a, b) => {
+        return b[order] - a[order];
+      });
+      console.log(order);
+      //aplies id as the key
+      let sortedComments = {};
+      sortedValues.forEach(element => {
+        sortedComments[element.id] = element;
+      });
+      return {
+        ...sortedComments
       };
     default:
       return state;
