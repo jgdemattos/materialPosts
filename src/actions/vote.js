@@ -1,4 +1,6 @@
 import { saveVote } from "../utils/API";
+import { sortPostsBy } from "./posts";
+import { sortComments } from "./comments";
 
 export const COMMENT_VOTE = "COMMENT_VOTE ";
 export const POST_VOTE = "POST_VOTE";
@@ -14,11 +16,17 @@ function vote({ id, vote, contentType }) {
 
 export function handleVote(info) {
   return dispatch => {
-    dispatch(vote(info));
-    return saveVote(info).catch(e => {
-      console.warn("error in handleVote:", e);
-      dispatch(vote(info));
-      alert("there was an error voting");
-    });
+    return saveVote(info)
+      .then(() => dispatch(vote(info)))
+      .then(
+        () =>
+          info.contentType === "comments" &&
+          //? dispatch(sortPostsBy("voteScore"))
+          dispatch(sortComments("voteScore"))
+      )
+      .catch(e => {
+        console.warn("error in handleVote:", e);
+        alert("there was an error voting");
+      });
   };
 }
