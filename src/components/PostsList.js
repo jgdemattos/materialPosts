@@ -27,7 +27,7 @@ class PostsList extends Component {
     dispatch(sortPostsBy(order));
   };
   render() {
-    const { posts, classes } = this.props;
+    const { posts, classes, category } = this.props;
     return (
       <div className="postsList">
         <Grid
@@ -61,9 +61,11 @@ class PostsList extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts }, { category }) {
   return {
-    posts: Object.values(posts).map(post => post)
+    posts: Object.values(posts).filter(
+      post => (category ? category === post.category : true)
+    )
   };
 }
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import CategoriesList from "../components/CategoriesList";
 import PostsList from "../components/PostsList";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
@@ -16,19 +15,18 @@ const styles = {
 
 class Root extends Component {
   render() {
+    const category = this.props.match.params.category;
     const { classes } = this.props;
     return (
       <div className="root">
         <Grid container justify={"center"} spacing={0}>
-          <CategoryDisplay className={classes.categories} />
-          {/*          <Grid container spacing={0} direction={"row"} justify={"center"}>
-            <div className={classes.categoriesList}>
-              <CategoriesList />
-            </div>
-          </Grid> */}
+          <CategoryDisplay
+            className={classes.categories}
+            currentCategory={category}
+          />
           <Grid container spacing={0} direction={"row"} justify={"center"}>
             <div className={classes.postsList}>
-              <PostsList />
+              <PostsList category={category} />
             </div>
           </Grid>
         </Grid>

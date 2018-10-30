@@ -23,7 +23,7 @@ function SimpleAppBar(props) {
       <LoadingBar />
       <AppBar position="static">
         <Toolbar>
-          <Typography color="inherit">Photos</Typography>
+          <Typography color="inherit">Material posts</Typography>
         </Toolbar>
       </AppBar>
     </div>

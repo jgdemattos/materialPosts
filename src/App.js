@@ -9,6 +9,7 @@ import AppBar from "./components/AppBar";
 import PostForm from "./views/PostForm";
 
 import "./App.css";
+import Category from "./views/Category";
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -37,6 +38,7 @@ class App extends Component {
                   component={PostForm}
                 />
                 <Route path="/form/:category/" exact component={PostForm} />
+                <Route path="/category/:category/" exact component={Category} />
               </div>
             )}
           </Fragment>
