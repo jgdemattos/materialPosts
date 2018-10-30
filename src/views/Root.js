@@ -10,7 +10,7 @@ const styles = {
     marginTop: 50
   },
   postsList: {
-    marginTop: 50
+    marginTop: 10
   }
 };
 

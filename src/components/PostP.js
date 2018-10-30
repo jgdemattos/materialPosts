@@ -15,6 +15,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PostFooter from "./PostFooter";
 import PostCreate from "./PostCreate";
 import PostHeader from "./PostHeader";
+import FourOFour from "./FourOFour";
 
 const styles = theme => ({
   commentTag: {
@@ -69,7 +70,16 @@ class Post extends React.Component {
   };
 
   render() {
-    const { classes, post, authedUser, formattedTime } = this.props;
+    const {
+      doesntExist,
+      classes,
+      post,
+      authedUser,
+      formattedTime
+    } = this.props;
+    if (doesntExist) {
+      return <FourOFour />;
+    }
     return (
       <Card className={classes.card} elevation={5}>
         <PostHeader
@@ -134,7 +144,11 @@ class Post extends React.Component {
 
 function mapStateToProps({ posts, authedUser }, { id }) {
   let post = posts[id];
-
+  if (!post) {
+    return {
+      doesntExist: true
+    };
+  }
   const monthNames = [
     "January",
     "February",
