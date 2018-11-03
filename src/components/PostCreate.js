@@ -70,7 +70,7 @@ class PostCreate extends Component {
       handleCreatePost({
         body: this.state.postBody,
         title: this.state.postTitle,
-        category: this.state.selectedCategory
+        category: this.state.selectedCategory || "react"
       })
     ).then(() =>
       this.setState({ postBody: "", submitted: !this.state.submitted }, () => {

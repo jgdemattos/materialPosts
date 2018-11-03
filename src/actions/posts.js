@@ -2,6 +2,10 @@ import { showLoading, hideLoading } from "react-redux-loading";
 import { savePost, updatePost, deletePost } from "../utils/API";
 import { guid } from "../utils/helper";
 import { setParentDeleted } from "./comments";
+import {
+  createNotification,
+  NOTIFICATION_TYPE_SUCCESS
+} from "react-redux-notify";
 
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const CREATE_POST = "CREATE_POST";
@@ -49,6 +53,17 @@ export function handleCreatePost({ body, title, category }) {
         dispatch(createPost(post));
       })
       .then(() => dispatch(sortPostsBy("voteScore")))
+      .then(() =>
+        dispatch(
+          createNotification({
+            message: "You created a new post",
+            type: NOTIFICATION_TYPE_SUCCESS,
+            duration: 2000,
+            canDismiss: true,
+            transitionDurations: { enter: 160, leave: 400 }
+          })
+        )
+      )
       .then(() => dispatch(hideLoading()));
   };
 }

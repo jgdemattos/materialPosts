@@ -27,7 +27,7 @@ class PostsList extends Component {
     dispatch(sortPostsBy(order));
   };
   render() {
-    const { posts, classes, category } = this.props;
+    const { posts, classes } = this.props;
     return (
       <div className="postsList">
         <Grid

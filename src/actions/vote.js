@@ -1,5 +1,4 @@
 import { saveVote } from "../utils/API";
-import { sortPostsBy } from "./posts";
 import { sortComments } from "./comments";
 import {
   createNotification,
