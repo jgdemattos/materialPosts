@@ -72,7 +72,6 @@ export default function comments(state = {}, action) {
       let sortedValues = Object.values(state).sort((a, b) => {
         return b[order] - a[order];
       });
-      console.log(order);
       //aplies id as the key
       let sortedComments = {};
       sortedValues.forEach(element => {

@@ -7,10 +7,13 @@ import Root from "./views/Root";
 import PostDetails from "./views/PostDetails";
 import AppBar from "./components/AppBar";
 import PostForm from "./views/PostForm";
-
 import "./App.css";
 import Category from "./views/Category";
 import FourOFour from "./components/FourOFour";
+import { Notify } from "react-redux-notify";
+import "react-redux-notify/dist/ReactReduxNotify.css";
+import Notification from "./components/Notification";
+
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -49,6 +52,10 @@ class App extends Component {
                 </Switch>
               </div>
             )}
+            <Notify
+              notificationComponent={Notification}
+              position={"BottomLeft"}
+            />
           </Fragment>
         </Router>
       </div>
