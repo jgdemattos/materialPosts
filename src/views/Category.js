@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PostsList from "../components/PostsList";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
@@ -13,26 +13,24 @@ const styles = {
   }
 };
 
-class Root extends Component {
-  render() {
-    const category = this.props.match.params.category;
-    const { classes } = this.props;
-    return (
-      <div className="root">
-        <Grid container justify={"center"} spacing={0}>
-          <CategoryDisplay
-            className={classes.categories}
-            currentCategory={category}
-          />
-          <Grid container spacing={0} direction={"row"} justify={"center"}>
-            <div className={classes.postsList}>
-              <PostsList category={category} />
-            </div>
-          </Grid>
+function Category(props) {
+  const category = props.match.params.category;
+  const { classes } = props;
+  return (
+    <div className="category">
+      <Grid container justify={"center"} spacing={0}>
+        <CategoryDisplay
+          className={classes.categories}
+          currentCategory={category}
+        />
+        <Grid container spacing={0} direction={"row"} justify={"center"}>
+          <div className={classes.postsList}>
+            <PostsList category={category} />
+          </div>
         </Grid>
-      </div>
-    );
-  }
+      </Grid>
+    </div>
+  );
 }
 
-export default withStyles(styles)(Root);
+export default withStyles(styles)(Category);

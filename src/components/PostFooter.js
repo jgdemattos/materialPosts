@@ -5,11 +5,13 @@ import CardContent from "@material-ui/core/CardContent";
 import Collapse from "@material-ui/core/Collapse";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
+
 const styles = {
   commentCreate: {
     marginTop: "30px"
   }
 };
+
 function PostFooter(props) {
   const { postId, expanded, classes } = props;
   return (

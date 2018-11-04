@@ -16,8 +16,22 @@ function vote({ id, vote, contentType }) {
   };
 }
 
+function createMessage(info, getState) {
+  const { id, contentType } = info;
+  const { posts, comments } = getState();
+  let message = "";
+  if (contentType === "posts") {
+    message = posts[id].author + "'s post";
+  } else {
+    message = comments[id].author + "'s comment";
+  }
+  return (
+    "You " + (info.vote === "upVote" ? "Liked" : "Disliked") + " " + message
+  );
+}
+
 export function handleVote(info) {
-  return dispatch => {
+  return (dispatch, getState) => {
     return saveVote(info)
       .then(() => dispatch(vote(info)))
       .then(
@@ -29,10 +43,7 @@ export function handleVote(info) {
       .then(() =>
         dispatch(
           createNotification({
-            message:
-              "You " +
-              (info.vote === "upVote" ? "Liked" : "Disliked") +
-              " sucessfully",
+            message: createMessage(info, getState),
             type: NOTIFICATION_TYPE_SUCCESS,
             duration: 2000,
             canDismiss: true,

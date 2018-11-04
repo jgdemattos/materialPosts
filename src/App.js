@@ -5,7 +5,7 @@ import { sortPostsBy } from "./actions/posts";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Root from "./views/Root";
 import PostDetails from "./views/PostDetails";
-import AppBar from "./components/AppBar";
+import TopBar from "./components/TopBar";
 import PostForm from "./views/PostForm";
 import "./App.css";
 import Category from "./views/Category";
@@ -24,10 +24,11 @@ class App extends Component {
 
   render() {
     return (
+      //some styling are just for fixing materialUi's weird and unaddressed grid behaviour
       <div style={{ margin: 0 }}>
         <Router>
           <Fragment>
-            <AppBar />
+            <TopBar />
             {this.props.loading === true ? null : (
               <div>
                 <Switch>

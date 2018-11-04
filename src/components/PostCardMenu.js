@@ -28,7 +28,7 @@ class PostCardMenu extends React.Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="postCardMenu">
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}

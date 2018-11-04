@@ -57,7 +57,7 @@ class Notification extends React.Component {
       handleDismissAll
     } = this.props;
     return (
-      <div>
+      <div className="notification">
         <Paper className={classes.notificationPaper}>
           <Grid container spacing={4} direction={"row"} justify={"center"}>
             <Grid item>

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import ReactDOM from "react-dom";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import { withStyles } from "@material-ui/core/styles";
@@ -26,7 +25,6 @@ const styles = theme => ({
 class OrderSelect extends Component {
   state = {
     order: "voteScore",
-    name: "hai",
     labelWidth: 0
   };
 
@@ -39,8 +37,6 @@ class OrderSelect extends Component {
   handleChange = event => {
     const { orderBy } = this.props;
     const order = event.target.value;
-
-    this.setState({ [event.target.name]: event.target.value });
 
     orderBy(order);
   };

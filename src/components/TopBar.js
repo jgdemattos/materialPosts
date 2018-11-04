@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import LoadingBar from "react-redux-loading";
 import { Link } from "react-router-dom";
 const styles = {
-  root: {
+  topBar: {
     flexGrow: 1,
     margin: 0,
     top: 0,
@@ -17,16 +17,19 @@ const styles = {
   cardHeaderLink: {
     textDecoration: "none",
     color: "white"
+  },
+  appBar: {
+    backgroundColor: "#313131"
   }
 };
 
-function SimpleAppBar(props) {
+function TopBar(props) {
   const { classes } = props;
 
   return (
-    <div className={classes.root}>
+    <div className={classes.topBar}>
       <LoadingBar />
-      <AppBar position="static">
+      <AppBar className={classes.appBar} position="static">
         <Toolbar>
           <Link className={classes.cardHeaderLink} to={`/`}>
             <Typography component="h2" variant="h3" color="inherit">
@@ -39,4 +42,4 @@ function SimpleAppBar(props) {
   );
 }
 
-export default withStyles(styles)(SimpleAppBar);
+export default withStyles(styles)(TopBar);

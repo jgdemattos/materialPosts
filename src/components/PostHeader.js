@@ -8,6 +8,8 @@ import PostCardMenu from "./PostCardMenu";
 import IconButton from "@material-ui/core/IconButton";
 import { withStyles } from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
+import { withRouter } from "react-router-dom";
+
 const styles = {
   avatar: {
     backgroundColor: red[500]
@@ -39,6 +41,9 @@ class PostHeader extends Component {
       })
     );
   };
+  toHome = () => {
+    this.props.history.push(`/`);
+  };
   render() {
     const {
       post,
@@ -47,6 +52,11 @@ class PostHeader extends Component {
       classes,
       formattedTime
     } = this.props;
+
+    if (post.deleted) {
+      this.toHome();
+    }
+
     return (
       <div className="postHeader">
         <CardHeader
@@ -81,5 +91,13 @@ class PostHeader extends Component {
     );
   }
 }
+function mapStateToProps({ posts }, { postId }) {
+  let post = posts[postId];
 
-export default connect()(withStyles(styles)(PostHeader));
+  return {
+    post
+  };
+}
+export default connect(mapStateToProps)(
+  withRouter(withStyles(styles)(PostHeader))
+);

@@ -19,3 +19,33 @@ export function guid() {
     s4()
   );
 }
+export function formatTime(timestamp) {
+  var date = new Date(timestamp);
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  let formattedTime =
+    monthNames[date.getMonth()] +
+    " " +
+    date.getDate() +
+    ", " +
+    date.getFullYear() +
+    " " +
+    date.getHours() +
+    ":" +
+    ("0" + date.getMinutes()).substr(-2);
+  return formattedTime;
+}

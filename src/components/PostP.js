@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { handleReceiveComments } from "../actions/comments";
-
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import Card from "@material-ui/core/Card";
@@ -16,7 +15,7 @@ import PostFooter from "./PostFooter";
 import PostCreate from "./PostCreate";
 import PostHeader from "./PostHeader";
 import FourOFour from "./FourOFour";
-
+import { formatTime } from "../utils/helper";
 const styles = theme => ({
   commentTag: {
     width: "fit-content"
@@ -83,7 +82,7 @@ class Post extends React.Component {
     return (
       <Card className={classes.card} elevation={5}>
         <PostHeader
-          post={post}
+          postId={post.id}
           handleToggleEdit={this.handleToggleEdit}
           authedUser={authedUser}
           formattedTime={formattedTime}
@@ -149,33 +148,8 @@ function mapStateToProps({ posts, authedUser }, { id }) {
       doesntExist: true
     };
   }
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
 
-  var date = new Date(post.timestamp);
-
-  var formattedTime =
-    monthNames[date.getMonth()] +
-    " " +
-    date.getDate() +
-    ", " +
-    date.getFullYear() +
-    " " +
-    date.getHours() +
-    ":" +
-    ("0" + date.getMinutes()).substr(-2);
+  let formattedTime = formatTime(post.timestamp);
 
   return {
     post,
