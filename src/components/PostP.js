@@ -16,6 +16,8 @@ import PostCreate from "./PostCreate";
 import PostHeader from "./PostHeader";
 import FourOFour from "./FourOFour";
 import { formatTime } from "../utils/helper";
+import PropTypes from "prop-types";
+
 const styles = theme => ({
   commentTag: {
     width: "fit-content"
@@ -140,6 +142,14 @@ class Post extends React.Component {
     );
   }
 }
+
+Post.propTypes = {
+  classes: PropTypes.object.isRequired,
+  doesntExist: PropTypes.bool,
+  post: PropTypes.object,
+  authedUser: PropTypes.string,
+  formattedTime: PropTypes.string
+};
 
 function mapStateToProps({ posts, authedUser }, { id }) {
   let post = posts[id];

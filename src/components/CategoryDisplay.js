@@ -5,6 +5,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
 const styles = theme => ({
   root: {
     display: "flex",
@@ -126,7 +127,7 @@ const images = {
   }
 };
 
-function ButtonBases(props) {
+function CategoryDisplay(props) {
   const { classes, categories, currentCategory } = props;
   return (
     <div className={classes.root}>
@@ -173,8 +174,10 @@ function ButtonBases(props) {
   );
 }
 
-ButtonBases.propTypes = {
-  classes: PropTypes.object.isRequired
+CategoryDisplay.propTypes = {
+  classes: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
+  currentCategory: PropTypes.string
 };
 
 function mapStateToProps({ categories }, { currentCategory }) {
@@ -184,4 +187,4 @@ function mapStateToProps({ categories }, { currentCategory }) {
   };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(ButtonBases));
+export default connect(mapStateToProps)(withStyles(styles)(CategoryDisplay));

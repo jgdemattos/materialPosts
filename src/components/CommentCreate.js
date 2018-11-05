@@ -6,6 +6,8 @@ import IconButton from "@material-ui/core/IconButton";
 import { handleCreateComment, handleEditComment } from "../actions/comments";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
+import PropTypes from "prop-types";
+
 const styles = {
   textField: {
     width: "270px",
@@ -98,5 +100,13 @@ class CommentCreate extends Component {
     );
   }
 }
+
+CommentCreate.propTypes = {
+  classes: PropTypes.object.isRequired,
+  postId: PropTypes.string,
+  commentBody: PropTypes.string,
+  commentId: PropTypes.string,
+  toggleEditComment: PropTypes.func
+};
 
 export default connect()(withStyles(styles)(CommentCreate));

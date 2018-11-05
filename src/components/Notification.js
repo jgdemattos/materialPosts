@@ -59,7 +59,7 @@ class Notification extends React.Component {
     return (
       <div className="notification">
         <Paper className={classes.notificationPaper}>
-          <Grid container spacing={4} direction={"row"} justify={"center"}>
+          <Grid container spacing={8} direction={"row"} justify={"center"}>
             <Grid item>
               {" "}
               <Typography

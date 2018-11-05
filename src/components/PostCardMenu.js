@@ -1,8 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+
 const styles = {
   cardHeaderLink: {
     textDecoration: "none"
@@ -36,7 +38,7 @@ class PostCardMenu extends React.Component {
           onClose={handleCloseMenu}
         >
           {ownPost && (
-            <Fragment>
+            <div>
               <MenuItem onClick={this.handleRemove}>Remove</MenuItem>
               <Link
                 className={classes.cardHeaderLink}
@@ -44,7 +46,7 @@ class PostCardMenu extends React.Component {
               >
                 <MenuItem>Edit</MenuItem>
               </Link>
-            </Fragment>
+            </div>
           )}
           <Link
             className={classes.cardHeaderLink}
@@ -57,5 +59,16 @@ class PostCardMenu extends React.Component {
     );
   }
 }
+
+PostCardMenu.propTypes = {
+  classes: PropTypes.object.isRequired,
+  anchorEl: PropTypes.object,
+  handleCloseMenu: PropTypes.func.isRequired,
+  postCategory: PropTypes.string.isRequired,
+  postId: PropTypes.string.isRequired,
+  ownPost: PropTypes.bool.isRequired,
+  handleToggleEdit: PropTypes.func.isRequired,
+  handleRemovePostUI: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(PostCardMenu);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Comment from "./Comment";
+import PropTypes from "prop-types";
 
 class CommentsList extends Component {
   render() {
@@ -22,6 +23,10 @@ class CommentsList extends Component {
     );
   }
 }
+
+CommentsList.propTypes = {
+  comments: PropTypes.array.isRequired
+};
 
 function mapStateToProps({ comments }, { postId }) {
   return {

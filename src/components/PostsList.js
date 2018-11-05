@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import OrderSelect from "./OrderSelect";
 import { sortPostsBy } from "../actions/posts";
+import PropTypes from "prop-types";
+
 const styles = {
   cardPostCreate: {
     padding: 20
@@ -60,6 +62,11 @@ class PostsList extends Component {
     );
   }
 }
+
+PostsList.propTypes = {
+  classes: PropTypes.object.isRequired,
+  posts: PropTypes.array.isRequired
+};
 
 function mapStateToProps({ posts }, { category }) {
   return {

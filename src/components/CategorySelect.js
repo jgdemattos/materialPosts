@@ -22,7 +22,7 @@ const styles = theme => ({
   }
 });
 
-class SimpleSelect extends React.Component {
+class CategorySelect extends React.Component {
   state = {
     age: "",
     name: "hai",
@@ -74,8 +74,9 @@ class SimpleSelect extends React.Component {
   }
 }
 
-SimpleSelect.propTypes = {
-  classes: PropTypes.object.isRequired
+CategorySelect.propTypes = {
+  classes: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(SimpleSelect);
+export default withStyles(styles)(CategorySelect);

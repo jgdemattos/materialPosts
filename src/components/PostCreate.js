@@ -9,6 +9,8 @@ import { handleCreatePost, handleEditPost } from "../actions/posts";
 import CategorySelect from "./CategorySelect";
 import ReactLoading from "react-loading";
 import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+
 const styles = {
   cardPostCreate: {
     padding: 20
@@ -156,6 +158,12 @@ class PostCreate extends Component {
     );
   }
 }
+PostCreate.propTypes = {
+  classes: PropTypes.object.isRequired,
+  post: PropTypes.object,
+  postId: PropTypes.string,
+  handleToggleEdit: PropTypes.func
+};
 
 function mapStateToProps({ categories, posts }, { postId }) {
   const post = posts[postId];

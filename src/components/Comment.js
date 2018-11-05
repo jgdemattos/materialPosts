@@ -9,6 +9,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Edit from "@material-ui/icons/Edit";
 import { handleRemoveComment } from "../actions/comments";
 import CommentCreate from "./CommentCreate";
+import PropTypes from "prop-types";
+
 const styles = {
   commentBody: {
     margin: 0,
@@ -126,6 +128,13 @@ class Comment extends Component {
     );
   }
 }
+
+Comment.propTypes = {
+  classes: PropTypes.object.isRequired,
+  comment: PropTypes.object.isRequired,
+  id: PropTypes.string,
+  ownComment: PropTypes.bool
+};
 
 function mapStateToProps({ comments, authedUser }, { id }) {
   let comment = comments[id];

@@ -5,6 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Collapse from "@material-ui/core/Collapse";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
 const styles = {
   commentCreate: {
@@ -29,5 +30,11 @@ function PostFooter(props) {
     </div>
   );
 }
+
+PostFooter.propTypes = {
+  classes: PropTypes.object.isRequired,
+  postId: PropTypes.string.isRequired,
+  expanded: PropTypes.bool.isRequired
+};
 
 export default withStyles(styles)(PostFooter);

@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { withStyles } from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
 import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const styles = {
   avatar: {
@@ -91,6 +92,15 @@ class PostHeader extends Component {
     );
   }
 }
+
+PostHeader.propTypes = {
+  classes: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired,
+  handleToggleEdit: PropTypes.func.isRequired,
+  authedUser: PropTypes.string,
+  formattedTime: PropTypes.string.isRequired
+};
+
 function mapStateToProps({ posts }, { postId }) {
   let post = posts[postId];
 

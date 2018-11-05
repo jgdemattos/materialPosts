@@ -6,6 +6,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import PropTypes from "prop-types";
+
 const styles = theme => ({
   root: {
     display: "flex",
@@ -39,6 +41,7 @@ class OrderSelect extends Component {
     const order = event.target.value;
 
     orderBy(order);
+    this.setState({ order });
   };
 
   render() {
@@ -73,5 +76,10 @@ class OrderSelect extends Component {
     );
   }
 }
+
+OrderSelect.propTypes = {
+  classes: PropTypes.object.isRequired,
+  orderBy: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(OrderSelect);

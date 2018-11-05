@@ -4,6 +4,7 @@ import ThumbUpAlt from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownAlt from "@material-ui/icons/ThumbDownAlt";
 import IconButton from "@material-ui/core/IconButton";
 import { handleVote } from "../actions/vote";
+import PropTypes from "prop-types";
 
 class Score extends Component {
   handleVoteUI = e => {
@@ -46,12 +47,17 @@ class Score extends Component {
   }
 }
 
-function mapStateToProps({ posts, comments, authedUser }, { id, contentType }) {
+Score.propTypes = {
+  id: PropTypes.string.isRequired,
+  contentType: PropTypes.string.isRequired,
+  scoreHolder: PropTypes.object.isRequired
+};
+
+function mapStateToProps({ posts, comments }, { id, contentType }) {
   let scoreHolder = contentType === "posts" ? posts[id] : comments[id];
 
   return {
-    scoreHolder,
-    authedUser
+    scoreHolder
   };
 }
 

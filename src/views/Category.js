@@ -3,7 +3,7 @@ import PostsList from "../components/PostsList";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import CategoryDisplay from "../components/CategoryDisplay";
-
+import PropTypes from "prop-types";
 const styles = {
   categoriesList: {
     marginTop: 50
@@ -32,5 +32,13 @@ function Category(props) {
     </div>
   );
 }
+
+Category.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      category: PropTypes.string.isRequired
+    })
+  })
+};
 
 export default withStyles(styles)(Category);
