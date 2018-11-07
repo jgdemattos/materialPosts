@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { handleVote } from "../actions/vote";
 import PropTypes from "prop-types";
 
-class Score extends Component {
+export class Score extends Component {
   handleVoteUI = e => {
     e.preventDefault();
 
@@ -31,6 +31,7 @@ class Score extends Component {
           value="upVote"
           aria-label="Like"
           onClick={this.handleVoteUI}
+          className="upVote"
         >
           <ThumbUpAlt />
         </IconButton>
