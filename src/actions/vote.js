@@ -7,7 +7,7 @@ import {
 export const COMMENT_VOTE = "COMMENT_VOTE ";
 export const POST_VOTE = "POST_VOTE";
 
-function vote({ id, vote, contentType }) {
+export function vote({ id, vote, contentType }) {
   return {
     type: contentType === "posts" ? POST_VOTE : COMMENT_VOTE,
     id,
