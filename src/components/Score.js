@@ -35,7 +35,9 @@ export class Score extends Component {
         >
           <ThumbUpAlt />
         </IconButton>
-        <div className="scoreValue">{scoreHolder.voteScore}</div>
+        <div style={{ display: "inline" }} className="scoreValue">
+          {scoreHolder.voteScore}
+        </div>
         <IconButton
           value="downVote"
           aria-label="Dislike"

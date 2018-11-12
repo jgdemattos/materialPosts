@@ -55,7 +55,10 @@ export default function posts(state = {}, action) {
         ...state,
         [action.post.id]: {
           ...state[action.post.id],
-          commentCount: state[action.post.id].commentCount + 1
+          commentCount:
+            action.operation === "increase"
+              ? state[action.post.id].commentCount + 1
+              : state[action.post.id].commentCount - 1
         }
       };
     case SORT_POSTS:

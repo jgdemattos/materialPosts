@@ -41,12 +41,16 @@ export function setParentDeleted(post) {
   };
 }
 export function handleRemoveComment({ id }) {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { posts, comments } = getState();
+    let comment = comments[id];
+    let post = posts[comment.parentId];
     dispatch(showLoading());
     return deleteComment(id)
       .then(comment => {
         dispatch(removeComment(comment));
       })
+      .then(() => dispatch(updateCommentCount({ post, operation: "decrease" })))
       .then(() => dispatch(hideLoading()));
   };
 }
@@ -93,8 +97,8 @@ export function handleCreateComment({ parentId, body }) {
     })
       .then(comment => {
         dispatch(createComment(comment));
-        dispatch(updateCommentCount(post));
       })
+      .then(() => dispatch(updateCommentCount({ post, operation: "increase" })))
       .then(() => dispatch(sortComments("voteScore")))
       .then(() => dispatch(hideLoading()));
   };

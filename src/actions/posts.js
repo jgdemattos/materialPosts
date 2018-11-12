@@ -75,10 +75,11 @@ export function editPost(post) {
   };
 }
 
-export function updateCommentCount(post) {
+export function updateCommentCount({ post, operation }) {
   return {
     type: UPDATE_COMMENT_COUNT,
-    post
+    post,
+    operation
   };
 }
 
