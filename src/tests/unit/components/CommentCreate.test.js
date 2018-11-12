@@ -1,8 +1,8 @@
 import React from "react";
 import { configure, shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { Score } from "../../components/Score";
-import mockStore from "../../utils/mockStore";
+import { CommentCreate } from "../../../components/CommentCreate";
+import mockStore from "../../../utils/mockStore";
 
 import chai, { expect } from "chai";
 import chaiRedux from "chai-redux";
@@ -27,24 +27,27 @@ const scoreHolder = {
   }
 };
 const props = {
-  id: "6ni6ok3ym7mf1p33lnez",
-  contentType: "posts",
-  scoreHolder: scoreHolder
+  commentBody: "comment body",
+  commentId: "someID",
+  classes: {}
 };
 
-let mockHandleVote = sinon.spy();
+let mockHandleEditComment = sinon.spy();
+let toggleEditComment = sinon.spy();
 function setup() {
   const enzymeWrapper = shallow(
-    <Score
+    <CommentCreate
       {...props}
       store={mockStore}
+      toggleEditComment={() => {
+        toggleEditComment();
+      }}
       dispatch={() => {
         let info = {
-          id: "6ni6ok3ym7mf1p33lnez",
-          vote: "upVote",
-          contentType: "posts"
+          id: "someID",
+          body: "comment body"
         };
-        mockHandleVote(info);
+        mockHandleEditComment(info);
       }}
     />
   );
@@ -58,13 +61,17 @@ describe("unit shallow component", () => {
   describe("voteScore", () => {
     it("should render self and subcomponents", () => {
       const { enzymeWrapper } = setup();
-      expect(enzymeWrapper.find(".score").hasClass("score")).to.equal(true);
+      expect(
+        enzymeWrapper.find(".commentCreate").hasClass("commentCreate")
+      ).to.equal(true);
 
-      const upVoteButton = enzymeWrapper.find(".upVote").props();
-      expect(upVoteButton.value).equal("upVote");
+      const textField = enzymeWrapper
+        .find("#outlined-multiline-flexible")
+        .props();
+      expect(textField.defaultValue).equal("comment body");
     });
 
-    it("should call action creator when upVote clicked", () => {
+    /*     it("should call action creator when upVote clicked", () => {
       const { enzymeWrapper } = setup();
       const upVoteButton = enzymeWrapper.find(".upVote");
       upVoteButton.simulate("click", {
@@ -77,6 +84,6 @@ describe("unit shallow component", () => {
         vote: "upVote",
         contentType: "posts"
       });
-    });
+    }); */
   });
 });

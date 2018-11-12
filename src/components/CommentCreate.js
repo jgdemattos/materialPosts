@@ -22,7 +22,7 @@ const styles = {
   }
 };
 
-class CommentCreate extends Component {
+export class CommentCreate extends Component {
   state = {
     value: "",
     submitted: false
