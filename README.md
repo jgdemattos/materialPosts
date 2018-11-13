@@ -23,7 +23,7 @@ run
 npm start
 ```
 
-You should have the [Readable API Server](https://github.com/udacity/reactnd-project-readable-starter) from udacity
+To run locally, you should have the [Readable API Server](https://github.com/udacity/reactnd-project-readable-starter) from udacity
 
 install
 
