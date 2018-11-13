@@ -97,7 +97,6 @@ PostHeader.propTypes = {
   classes: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
   handleToggleEdit: PropTypes.func.isRequired,
-  authedUser: PropTypes.string,
   formattedTime: PropTypes.string.isRequired
 };
 

@@ -44,8 +44,8 @@ class Notification extends React.Component {
   render() {
     const {
       classes,
-      message,
-      type,
+      message
+      /*       type,
       canDismiss,
       acceptBtn,
       denyBtn,
@@ -54,7 +54,7 @@ class Notification extends React.Component {
       id,
       isFirst,
       handleDismiss,
-      handleDismissAll
+      handleDismissAll */
     } = this.props;
     return (
       <div className="notification">

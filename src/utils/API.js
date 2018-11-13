@@ -1,4 +1,5 @@
-const api = process.env.REACT_APP_CONTACTS_API_URL || "http://localhost:3001";
+//const api = process.env.REACT_APP_CONTACTS_API_URL || "http://localhost:3001";
+const api = "https://material-posts.herokuapp.com";
 
 let token = localStorage.token;
 if (!token)

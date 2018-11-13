@@ -4,7 +4,7 @@ A material design interpretation of a basic social newtwork, with posts and comm
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine.
 
 ### Installing
 
@@ -60,6 +60,10 @@ npm test
 - [redux-thunk](https://rometools.github.io/rome/) - Redux Thunk middleware allows you to write action creators that return a function instead of an action.
 
 Also: - `MaterialUI` - Material design implementation for react - `sinon` - spies, stubs and mocks - `chai` - assertions for enzyme. - `enzyme` - testing utility for React - `jest` - testing utility - `react-redux-notify` - notifications component built with and for React and Redux
+
+## Working demo
+
+[On netlify](https://quirky-euler-8ee8af.netlify.com/)
 
 ## Authors
 

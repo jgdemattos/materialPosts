@@ -147,7 +147,6 @@ Post.propTypes = {
   classes: PropTypes.object.isRequired,
   doesntExist: PropTypes.bool,
   post: PropTypes.object,
-  authedUser: PropTypes.string,
   formattedTime: PropTypes.string
 };
 
