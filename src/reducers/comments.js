@@ -23,8 +23,8 @@ export default function comments(state = {}, action) {
           ...state[action.id],
           voteScore:
             action.vote === "upVote"
-              ? (state[action.id].voteScore = state[action.id].voteScore + 1)
-              : (state[action.id].voteScore = state[action.id].voteScore - 1)
+              ? state[action.id].voteScore + 1
+              : state[action.id].voteScore - 1
         }
       };
     case CREATE_COMMENT:
