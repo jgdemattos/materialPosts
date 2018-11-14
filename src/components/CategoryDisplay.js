@@ -145,10 +145,7 @@ function CategoryDisplay(props) {
             width: images[category.name].width
           }}
         >
-          <Link
-            className={classes.cardHeaderLink}
-            to={`/category/${category.path}/`}
-          >
+          <Link className={classes.cardHeaderLink} to={`/${category.path}/`}>
             <span
               className={classes.imageSrc}
               style={{

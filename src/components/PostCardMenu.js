@@ -50,7 +50,7 @@ class PostCardMenu extends React.Component {
           )}
           <Link
             className={classes.cardHeaderLink}
-            to={`/detail/${postCategory}/${postId}`}
+            to={`/${postCategory}/${postId}`}
           >
             <MenuItem>View</MenuItem>
           </Link>

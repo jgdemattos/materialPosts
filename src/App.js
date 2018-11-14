@@ -33,21 +33,18 @@ class App extends Component {
               <div>
                 <Switch>
                   <Route path="/" exact component={Root} />
+                  <Route path="/:category/" exact component={Category} />
                   <Route
-                    path="/detail/:category/:postId"
+                    path="/:category/:postId"
                     exact
                     component={PostDetails}
                   />
+
+                  <Route path="/form/:category/" exact component={PostForm} />
                   <Route
                     path="/form/:category/:postId"
                     exact
                     component={PostForm}
-                  />
-                  <Route path="/form/:category/" exact component={PostForm} />
-                  <Route
-                    path="/category/:category/"
-                    exact
-                    component={Category}
                   />
                   <Route component={FourOFour} />
                 </Switch>
