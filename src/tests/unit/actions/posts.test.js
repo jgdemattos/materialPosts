@@ -54,12 +54,14 @@ describe("actions", () => {
 
   it("should correctly create UPDATE_COMMENT_COUNT action", () => {
     const action = {
-      id: "someId"
+      post: { id: "someId" },
+      operation: "increase"
     };
 
     const expectedAction = {
       type: actions.UPDATE_COMMENT_COUNT,
-      post: { id: "someId" }
+      post: { id: "someId" },
+      operation: "increase"
     };
     expect(actions.updateCommentCount(action)).toEqual(expectedAction);
   });

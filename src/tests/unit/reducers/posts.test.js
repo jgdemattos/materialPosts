@@ -136,7 +136,8 @@ describe("reducer", () => {
           type: types.UPDATE_COMMENT_COUNT,
           post: {
             id: "8xf0y6ziyjabvozdd253nd"
-          }
+          },
+          operation: "increase"
         }
       )
     ).toEqual({
