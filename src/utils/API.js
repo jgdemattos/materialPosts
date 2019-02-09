@@ -1,11 +1,11 @@
 //const api = process.env.REACT_APP_CONTACTS_API_URL || "http://localhost:3001";
 let api = "";
 
-if ("TRUE" === process.env.PRODUCTION) {
-  api = "https://material-posts.herokuapp.com";
-} else {
+/* if ("TRUE" === process.env.PRODUCTION) { */
+api = "https://material-posts.herokuapp.com";
+/* } else {
   api = "http://localhost:3001";
-}
+} */
 
 let token = localStorage.token;
 if (!token)
